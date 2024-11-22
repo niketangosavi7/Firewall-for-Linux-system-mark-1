@@ -1,0 +1,34 @@
+sudo iptables -A INPUT -p tcp -s 192.168.1.10 --syn -j ACCEP
+sudo iptables -A INPUT -p tcp --syn -j DROP
+sudo iptables-save > /etc/iptables/rules.v4
+sudo apt update && sudo apt upgrade -y
+sudo apt install ufw -y
+sudo ufw default deny incoming
+sudo ufw default allow outgoing
+sudo ufw allow from <your-ip> to any port 22
+sudo ufw allow 80/tcp
+sudo ufw allow 443/tcp
+sudo ufw allow 1194/udp
+sudo ufw logging on
+sudo ufw enable
+sudo iptables -A INPUT -p tcp -s <allowed-ip> --dport 443 -j ACCEPT
+sudo iptables -A INPUT -p tcp --dport 443 -j DROP
+sudo nano /etc/ssh/sshd_config
+sudo nano /etc/ssh/sshd_config
+
+In this file:
+
+Set PermitRootLogin no to prevent root login.
+
+Use strong key exchange and ciphers:
+
+
+KexAlgorithms curve25519-sha256@libssh.org,diffie-hellman-group-exchange-sha256
+Ciphers aes256-gcm@openssh.com,chacha20-poly1305@openssh.com
+MACs hmac-sha2-512,hmac-sha2-256
+sudo systemctl restart ssh
+sudo iptables -A INPUT -j DROP
+sudo ufw status verbose
+sudo iptables -L -v
+
+sudo iptables -L -v
